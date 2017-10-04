@@ -6,6 +6,7 @@ Vagrant.configure("2") do |config|
     host.vm.provider "virtualbox" do |vb|
       vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     end
+    host.vm.provision :shell, privileged: false, path: "bootstrap-chef-server.sh"
   end
 
   config.vm.define :chef_node do |host|
@@ -15,5 +16,6 @@ Vagrant.configure("2") do |config|
     host.vm.provider "virtualbox" do |vb|
       vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     end
+    host.vm.provision :shell, privileged: false, path: "bootstrap-chef-node.sh"
   end
 end
